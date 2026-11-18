@@ -38,11 +38,12 @@ function Layout() {
         Saltar al contenido
       </a>
       <header className="border-b bg-card print:hidden">
-        <div className="mx-auto flex h-14 max-w-[1440px] items-stretch gap-5 px-4 sm:gap-8 lg:px-8">
-          <Link to="/" className="flex items-center text-lg font-semibold tracking-tight text-foreground">
+        {/* En móvil el menú baja a una segunda fila: en 360 px no caben logo, 4 secciones y el botón de tema. */}
+        <div className="mx-auto flex max-w-[1440px] flex-wrap items-stretch gap-x-5 px-4 sm:gap-x-8 lg:px-8">
+          <Link to="/" className="order-1 flex h-14 items-center text-lg font-semibold tracking-tight text-foreground">
             VehDemo
           </Link>
-          <nav aria-label="Secciones" className="flex items-stretch gap-4 sm:gap-6">
+          <nav aria-label="Secciones" className="order-3 flex h-11 w-full items-stretch gap-4 sm:order-2 sm:h-14 sm:w-auto sm:gap-6">
             {SECCIONES.map((s) => (
               <Link
                 key={s.to}
@@ -55,11 +56,12 @@ function Layout() {
               </Link>
             ))}
           </nav>
-          <div className="ml-auto flex items-center gap-3">
+          <div className="order-2 ml-auto flex h-14 items-center gap-3 sm:order-3">
             <p className="hidden text-xs text-muted-foreground md:block">Hoy es {FECHA_DATOS}</p>
             <Button
               variant="ghost"
               size="icon"
+              className="max-sm:size-10"
               onClick={alternarTema}
               aria-label={oscuro ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
               title={oscuro ? 'Modo claro' : 'Modo oscuro'}
