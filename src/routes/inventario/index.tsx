@@ -315,7 +315,7 @@ function SelectorVista({ vista }: { vista: Vista }) {
             aria-current={vista === valor ? 'true' : undefined}
             className={cn(
               'inline-flex flex-1 items-center justify-center gap-1.5 rounded-xs px-3 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
-              vista === valor ? 'bg-brand-50 text-brand-800' : 'text-muted-foreground hover:text-foreground',
+              vista === valor ? 'bg-brand-50 text-brand-800 dark:bg-brand-950 dark:text-brand-100' : 'text-muted-foreground hover:text-foreground',
             )}
           >
             <Icono className="size-4" aria-hidden />

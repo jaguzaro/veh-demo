@@ -14,6 +14,7 @@ import { KpiCard, type Alerta } from '@/components/kpi-card'
 import { Panel } from '@/components/panel'
 import { FILTROS_DEFAULT, RANGOS, validarFiltros, type Filtros } from '@/lib/filtros'
 import { fmtDias, fmtEntero, fmtFecha, fmtMesCorto, fmtMesLargo, fmtPct, fmtQ, fmtQCorto, variacion } from '@/lib/format'
+import { useTema } from '@/lib/tema'
 import { cn } from '@/lib/utils'
 
 export const Route = createFileRoute('/')({
@@ -97,7 +98,9 @@ function Ganancia({ data }: { data: ResumenData }) {
   const baja = cambio !== null && cambio < -0.001
   const Flecha = sube ? ArrowUpRight : ArrowDownRight
 
+  const tema = useTema() // los colores del canvas dependen del tema: repinta al cambiarlo
   const opcion = useMemo<ChartOption>(() => {
+    void tema // token() lee el tema activo: sin esta dependencia el canvas no se repinta
     const d = new Date(periodo.desde)
     const inicioPeriodo = new Date(d.getFullYear(), d.getMonth(), 1).getTime()
     const etiquetas = token('color-brand-100')
@@ -139,7 +142,7 @@ function Ganancia({ data }: { data: ResumenData }) {
         },
       ],
     }
-  }, [meses, periodo.desde])
+  }, [meses, periodo.desde, tema])
 
   const resumenGrafico = `Ganancia por mes. ${meses.map((m) => `${fmtMesLargo(m.mes)}: ${fmtQ(m.ganancia)}`).join('. ')}`
 
@@ -152,7 +155,7 @@ function Ganancia({ data }: { data: ResumenData }) {
         <h2 id="titulo-ganancia" className="text-base font-medium text-brand-100">
           {TITULO_GANANCIA[periodo.rango]}
         </h2>
-        <p className={cn('mt-2 text-[2.5rem] leading-tight font-semibold sm:text-hero', actual.ganancia < 0 && 'text-bad-subtle')}>
+        <p className={cn('mt-2 text-[2.5rem] leading-tight font-semibold sm:text-hero', actual.ganancia < 0 && 'text-bad-onbrand')}>
           {fmtQ(actual.ganancia)}
         </p>
         {cambio !== null && (sube || baja) && (
@@ -234,13 +237,15 @@ function Kpis({ data }: { data: ResumenData }) {
 function GastosPorMes({ data }: { data: ResumenData }) {
   const { meses } = data
 
+  const tema = useTema() // los colores del canvas dependen del tema: repinta al cambiarlo
   const opcion = useMemo<ChartOption>(() => {
+    void tema // token() lee el tema activo: sin esta dependencia el canvas no se repinta
     const serie = (nombre: string, clave: 'compras' | 'otrosGastos', color: string) => ({
       name: nombre,
       type: 'bar',
       stack: 'gastos',
       data: meses.map((m) => m[clave]),
-      itemStyle: { color: token(color), borderColor: token('color-white'), borderWidth: 1 },
+      itemStyle: { color: token(color), borderColor: token('color-neutral-0'), borderWidth: 1 },
       barMaxWidth: 40,
       emphasis: { disabled: true },
     })
@@ -264,7 +269,7 @@ function GastosPorMes({ data }: { data: ResumenData }) {
       },
       series: [serie('Compra de autos', 'compras', 'color-series-1'), serie('Otros gastos', 'otrosGastos', 'color-series-2')],
     }
-  }, [meses])
+  }, [meses, tema])
 
   const resumenGrafico = `Gastos por mes. ${meses
     .map((m) => `${fmtMesLargo(m.mes)}: compra de autos ${fmtQ(m.compras)}, otros gastos ${fmtQ(m.otrosGastos)}`)
@@ -395,7 +400,7 @@ function ListaVendidos({ titulo, filas, maximo }: { titulo: string; filas: FilaV
               nombre={f.nombre}
               valor={f.ganancia < 0 ? `−${fmtQ(-f.ganancia)}` : fmtQ(f.ganancia)}
               barra={maximo ? Math.abs(f.ganancia) / maximo : 0}
-              tono={f.ganancia < 0 ? 'bg-bad-fill' : 'bg-brand-600'}
+              tono={f.ganancia < 0 ? 'bg-bad-fill' : 'bg-brand-600 dark:bg-brand-400'}
               tonoValor={f.ganancia < 0 ? 'text-bad-text' : undefined}
             />
           ))}

@@ -45,13 +45,13 @@ function Silueta({ carroceria }: { carroceria: Carroceria }) {
   const s = SILUETA[carroceria] ?? SILUETA.Sedán
   return (
     <svg viewBox="0 0 120 48" className="h-auto w-3/4" aria-hidden>
-      <path d={s.cuerpo} className="fill-brand-200" />
-      <path d={s.ventana} className="fill-brand-50" />
+      <path d={s.cuerpo} className="fill-brand-200 dark:fill-brand-700" />
+      <path d={s.ventana} className="fill-brand-50 dark:fill-brand-950" />
       {s.ruedas.map((x) => (
         <g key={x}>
-          <circle cx={x} cy={37} r={s.r + 2} className="fill-brand-50" />
-          <circle cx={x} cy={37} r={s.r} className="fill-brand-800" />
-          <circle cx={x} cy={37} r={s.r * 0.4} className="fill-brand-300" />
+          <circle cx={x} cy={37} r={s.r + 2} className="fill-brand-50 dark:fill-brand-950" />
+          <circle cx={x} cy={37} r={s.r} className="fill-brand-800 dark:fill-brand-200" />
+          <circle cx={x} cy={37} r={s.r * 0.4} className="fill-brand-300 dark:fill-brand-800" />
         </g>
       ))}
     </svg>
@@ -72,7 +72,7 @@ export const FotoVehiculo = memo(function FotoVehiculo({
 }) {
   const { data: foto } = useQuery(fotoQuery(id))
   return (
-    <div className={cn('flex aspect-[4/3] items-center justify-center overflow-hidden bg-brand-50', className)}>
+    <div className={cn('flex aspect-[4/3] items-center justify-center overflow-hidden bg-brand-50 dark:bg-brand-950', className)}>
       {foto ? (
         <img src={foto} alt={`Foto del ${nombre}`} loading="lazy" decoding="async" className="size-full object-cover" />
       ) : (

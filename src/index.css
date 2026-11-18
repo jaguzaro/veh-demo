@@ -66,6 +66,7 @@
   --color-bad-fill: #dc2626;
   --color-bad-text: #b91c1c;
   --color-bad-subtle: #fef2f2;
+  --color-bad-onbrand: #fef2f2; /* texto de pérdida sobre el panel azul de ganancia (igual en ambos temas) */
 
   /* --- Tipografía --- */
   --font-sans: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
@@ -198,6 +199,61 @@
   --sidebar-ring: var(--color-brand-600);
 
   color-scheme: light;
+}
+
+/*
+ * ============================================================
+ *  Modo oscuro. Se activa con la clase .dark en <html> (src/lib/tema.ts).
+ *  Se redefinen los tokens (escala neutra invertida, semánticos y series),
+ *  así toda utilidad que los use cambia sola. La escala de marca no se toca:
+ *  el panel de ganancia (brand-700) conserva su azul en ambos temas.
+ *  Contrastes verificados: texto ≥6.5:1, texto de marca ≥5.5:1, controles ≥4.5:1.
+ * ============================================================
+ */
+.dark {
+  --color-neutral-0: #181d29; /* superficie de tarjeta */
+  --color-neutral-50: #0f131b; /* fondo de página */
+  --color-neutral-100: #202736; /* retícula de gráficos, hover */
+  --color-neutral-200: #2c3445; /* borde */
+  --color-neutral-300: #404a5e;
+  --color-neutral-400: #7d879a; /* borde fuerte / input (4.7:1) */
+  --color-neutral-500: #99a2b4; /* texto terciario (6.6:1) */
+  --color-neutral-600: #b3bbca; /* texto secundario (8.7:1) */
+  --color-neutral-700: #cbd1dc;
+  --color-neutral-800: #e0e4eb;
+  --color-neutral-900: #eef0f4; /* texto principal (14.8:1) */
+
+  --color-ok-fill: #22c55e;
+  --color-ok-text: #4ade80;
+  --color-ok-subtle: #0f2a1a;
+  --color-warn-fill: #f59e0b;
+  --color-warn-text: #fbbf24;
+  --color-warn-subtle: #2b1f0a;
+  --color-bad-fill: #ef4444;
+  --color-bad-text: #f87171;
+  --color-bad-subtle: #2d1417;
+
+  --shadow-overlay: 0 4px 16px -2px rgb(0 0 0 / 0.55), 0 1px 3px rgb(0 0 0 / 0.4);
+
+  --color-series-1: var(--color-brand-400);
+  --color-series-2: var(--color-brand-300);
+  --color-series-3: var(--color-brand-200);
+  --color-series-4: var(--color-neutral-400);
+  --color-series-5: var(--color-brand-100);
+
+  --primary: var(--color-brand-400);
+  --primary-foreground: var(--color-neutral-50);
+  --accent: var(--color-brand-950);
+  --accent-foreground: var(--color-brand-100);
+  --ring: var(--color-brand-400);
+
+  --sidebar-primary: var(--color-brand-400);
+  --sidebar-primary-foreground: var(--color-neutral-50);
+  --sidebar-accent: var(--color-brand-950);
+  --sidebar-accent-foreground: var(--color-brand-100);
+  --sidebar-ring: var(--color-brand-400);
+
+  color-scheme: dark;
 }
 
 @layer base {

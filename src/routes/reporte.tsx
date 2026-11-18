@@ -213,7 +213,7 @@ function BarrasMeses({ meses, actual }: { meses: ReporteMesData['meses']; actual
           <div key={m.mes} className="flex h-full min-w-0 flex-1 flex-col items-center justify-end gap-1">
             <span className="text-[11px] whitespace-nowrap text-muted-foreground">{fmtQCorto(m.ganancia)}</span>
             <span
-              className={cn('w-full max-w-10 rounded-t-xs', m.mes === actual ? 'bg-brand-700' : 'bg-brand-200')}
+              className={cn('w-full max-w-10 rounded-t-xs', m.mes === actual ? 'bg-brand-700 dark:bg-brand-400' : 'bg-brand-200 dark:bg-brand-900')}
               style={{ height: `${(Math.max(0, m.ganancia) / max) * 100 * 0.8}%` }}
             />
           </div>

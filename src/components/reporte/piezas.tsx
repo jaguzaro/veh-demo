@@ -68,7 +68,7 @@ export function ListaBarras({ items }: { items: { etiqueta: string; valor: numbe
           <span className="truncate">{i.etiqueta}</span>
           <span className="font-medium">{i.texto}</span>
           <span aria-hidden className="col-span-2 block h-1.5 rounded-xs bg-muted">
-            <span className="block h-full rounded-xs bg-brand-600" style={{ width: `${(i.valor / max) * 100}%` }} />
+            <span className="block h-full rounded-xs bg-brand-600 dark:bg-brand-400" style={{ width: `${(i.valor / max) * 100}%` }} />
           </span>
         </li>
       ))}

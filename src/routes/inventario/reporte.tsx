@@ -154,7 +154,7 @@ function HojaInventario({ data }: { data: ReporteInventarioData }) {
                       <span className="font-medium">{autos(d.unidades)}</span>
                       <span aria-hidden className="col-span-2 block h-1.5 rounded-xs bg-muted">
                         <span
-                          className={cn('block h-full rounded-xs', d.alerta ? 'bg-bad-text' : 'bg-brand-600')}
+                          className={cn('block h-full rounded-xs', d.alerta ? 'bg-bad-text' : 'bg-brand-600 dark:bg-brand-400')}
                           style={{ width: `${(d.unidades / max) * 100}%` }}
                         />
                       </span>
@@ -202,7 +202,7 @@ function filaTabla(f: FilaReporteInventario) {
   return [
     <span key="a" className="block">
       <span className="font-medium">{f.nombre}</span>
-      {f.modalidad === 'consignacion' && <span className="ml-1.5 text-xs text-brand-800">consignación</span>}
+      {f.modalidad === 'consignacion' && <span className="ml-1.5 text-xs text-brand-800 dark:text-brand-300">consignación</span>}
       <span className="block text-xs text-muted-foreground">{f.detalle}</span>
     </span>,
     <span key="d" className={cn(atrasado && 'font-semibold text-bad-text')}>

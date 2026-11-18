@@ -5,6 +5,11 @@
 
 const cache = new Map<string, string>()
 
+/** Vacía la caché de tokens; se llama al cambiar de tema para releer los colores del tema activo. */
+export function limpiarTokens() {
+  cache.clear()
+}
+
 /** Lee un token CSS, p. ej. token('color-brand-600') */
 export function token(nombre: string): string {
   let valor = cache.get(nombre)

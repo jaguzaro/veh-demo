@@ -270,18 +270,18 @@ function Paso({
           aria-hidden
           className={cn(
             'flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold',
-            hecho && 'bg-brand-600 text-white',
-            estado === 'actual' && 'border-2 border-brand-600 text-brand-700',
+            hecho && 'bg-brand-600 text-white dark:bg-brand-400 dark:text-primary-foreground',
+            estado === 'actual' && 'border-2 border-brand-600 text-brand-700 dark:border-brand-400 dark:text-brand-300',
             estado === 'pendiente' && 'border border-border-strong text-muted-foreground',
           )}
         >
           {n}
         </span>
-        <span aria-hidden className={cn('h-px flex-1 max-sm:hidden', hecho ? 'bg-brand-600' : 'bg-border')} />
+        <span aria-hidden className={cn('h-px flex-1 max-sm:hidden', hecho ? 'bg-brand-600 dark:bg-brand-400' : 'bg-border')} />
       </div>
       <h3 className={cn('text-sm font-semibold sm:mt-3', estado === 'pendiente' && 'text-muted-foreground')}>
         {titulo}
-        {estado === 'actual' && <span className="font-normal text-brand-700">, en curso</span>}
+        {estado === 'actual' && <span className="font-normal text-brand-700 dark:text-brand-300">, en curso</span>}
         {estado === 'pendiente' && <span className="font-normal">, pendiente</span>}
       </h3>
       <div className="mt-1 text-sm text-muted-foreground">{children}</div>
