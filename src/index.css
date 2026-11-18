@@ -1,0 +1,249 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/ibm-plex-sans";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * ============================================================
+ *  VehDemo — Sistema de diseño "Libro Mayor Suizo"
+ *  Fuente de verdad visual. Ver DESIGN-BRIEF.md.
+ *  Se eliminan las paletas, sombras, tamaños y fuentes por
+ *  defecto de Tailwind: solo existen los tokens de este bloque.
+ * ============================================================
+ */
+@theme static {
+  /* --- Reset de valores por defecto de Tailwind --- */
+  --color-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --text-*: initial;
+  --font-*: initial;
+
+  /* --- Básicos --- */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* --- Azul cobalto (marca y datos). Marca = 600 --- */
+  --color-brand-50: #eff4ff;
+  --color-brand-100: #dbe6fe;
+  --color-brand-200: #bfd3fe;
+  --color-brand-300: #93b4fd;
+  --color-brand-400: #6090fa;
+  --color-brand-500: #3b6ef5;
+  --color-brand-600: #2552e0;
+  --color-brand-700: #1d41c2;
+  --color-brand-800: #1e389d;
+  --color-brand-900: #1e327c;
+  --color-brand-950: #141f4d;
+
+  /* --- Neutros fríos --- */
+  --color-neutral-0: #ffffff; /* superficie de tarjeta */
+  --color-neutral-50: #f7f8fa; /* fondo de página */
+  --color-neutral-100: #eef0f4; /* retícula de gráficos, hover */
+  --color-neutral-200: #dde1e8; /* borde */
+  --color-neutral-300: #c3c9d4;
+  --color-neutral-400: #868fa0; /* borde fuerte / input (3.26:1) */
+  --color-neutral-500: #646e80; /* texto terciario (5.14:1) */
+  --color-neutral-600: #4b5466; /* texto secundario (7.61:1) */
+  --color-neutral-700: #363e4e;
+  --color-neutral-800: #232a38;
+  --color-neutral-900: #151a24; /* texto principal (17.4:1) */
+
+  /* --- Semánticos: SOLO semáforo de inventario y alertas de KPI ---
+     *-fill: relleno de barras (≥3:1 sobre blanco)
+     *-text: texto, íconos y barra de alerta (≥4.5:1)            */
+  --color-ok-fill: #16a34a;
+  --color-ok-text: #15803d;
+  --color-ok-subtle: #ecfdf3;
+  --color-warn-fill: #d97706;
+  --color-warn-text: #b45309;
+  --color-warn-subtle: #fff7eb;
+  --color-bad-fill: #dc2626;
+  --color-bad-text: #b91c1c;
+  --color-bad-subtle: #fef2f2;
+
+  /* --- Tipografía --- */
+  --font-sans: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sans);
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Escala tipográfica (densidad media; texto base de interfaz = sm) */
+  --text-xs: 0.75rem; /* 12px — etiquetas, ejes */
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem; /* 14px — texto de interfaz y tablas */
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem; /* 16px */
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.125rem; /* 18px — título de tarjeta/sección */
+  --text-lg--line-height: 1.625rem;
+  --text-xl: 1.25rem; /* 20px */
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem; /* 24px — título de página */
+  --text-2xl--line-height: 2rem;
+  --text-kpi: 2.25rem; /* 36px — número KPI escritorio */
+  --text-kpi--line-height: 2.5rem;
+  --text-kpi--letter-spacing: -0.02em;
+  --text-kpi-sm: 1.75rem; /* 28px — número KPI en móvil */
+  --text-kpi-sm--line-height: 2.25rem;
+  --text-kpi-sm--letter-spacing: -0.015em;
+  --text-hero: 3.5rem; /* 56px — indicador rey (ROI), uno por pantalla */
+  --text-hero--line-height: 1;
+  --text-hero--letter-spacing: -0.03em;
+
+  /* --- Sombra: una sola, solo para capas flotantes --- */
+  --shadow-overlay: 0 4px 16px -2px rgb(21 26 36 / 0.12), 0 1px 3px rgb(21 26 36 / 0.08);
+
+  /* --- Movimiento bajo --- */
+  --default-transition-duration: 120ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* --- Series de gráficos (ECharts) --- */
+  --color-series-1: var(--color-brand-600); /* serie principal */
+  --color-series-2: var(--color-brand-400); /* comparativo / meta (3.06:1) */
+  --color-series-3: var(--color-brand-800);
+  --color-series-4: var(--color-neutral-400);
+  --color-series-5: var(--color-brand-950);
+}
+
+/* Puente: tokens de shadcn/ui -> tokens del sistema */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Radios: 2px controles, 4px tarjetas. Nada más redondeado
+     (excepto rounded-full para avatares/indicadores). */
+  --radius-xs: 2px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 4px;
+  --radius-2xl: 4px;
+  --radius-3xl: 4px;
+  --radius-4xl: 4px;
+}
+
+:root {
+  --radius: 4px;
+
+  --background: var(--color-neutral-50);
+  --foreground: var(--color-neutral-900);
+  --card: var(--color-neutral-0);
+  --card-foreground: var(--color-neutral-900);
+  --popover: var(--color-neutral-0);
+  --popover-foreground: var(--color-neutral-900);
+  --primary: var(--color-brand-600);
+  --primary-foreground: var(--color-white);
+  --secondary: var(--color-neutral-100);
+  --secondary-foreground: var(--color-neutral-900);
+  --muted: var(--color-neutral-100);
+  --muted-foreground: var(--color-neutral-600);
+  --subtle-foreground: var(--color-neutral-500);
+  --accent: var(--color-brand-50);
+  --accent-foreground: var(--color-brand-700);
+  --destructive: var(--color-bad-text);
+  --border: var(--color-neutral-200);
+  --border-strong: var(--color-neutral-400);
+  --input: var(--color-neutral-400);
+  --ring: var(--color-brand-600);
+
+  --chart-1: var(--color-series-1);
+  --chart-2: var(--color-series-2);
+  --chart-3: var(--color-series-3);
+  --chart-4: var(--color-series-4);
+  --chart-5: var(--color-series-5);
+
+  --sidebar: var(--color-neutral-0);
+  --sidebar-foreground: var(--color-neutral-900);
+  --sidebar-primary: var(--color-brand-600);
+  --sidebar-primary-foreground: var(--color-white);
+  --sidebar-accent: var(--color-brand-50);
+  --sidebar-accent-foreground: var(--color-brand-700);
+  --sidebar-border: var(--color-neutral-200);
+  --sidebar-ring: var(--color-brand-600);
+
+  color-scheme: light;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-background text-foreground text-sm;
+    /* Cifras tabulares en toda la interfaz: los números se alinean en KPIs y tablas */
+    font-variant-numeric: tabular-nums;
+  }
+  p,
+  dd {
+    text-wrap: pretty;
+  }
+}
+
+/* Movimiento bajo: sin animaciones para quien lo pida */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Impresión (reporte mensual): hoja carta, fondo blanco y colores exactos */
+@media print {
+  @page {
+    size: letter;
+    margin: 14mm 14mm 16mm;
+  }
+  html,
+  body {
+    background: white;
+  }
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
