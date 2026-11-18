@@ -1,6 +1,9 @@
 import type { QueryClient } from '@tanstack/react-query'
 import { createRootRouteWithContext, Link, Outlet } from '@tanstack/react-router'
+import { Moon, Sun } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { fmtFecha } from '@/lib/format'
+import { alternarTema, useTema } from '@/lib/tema'
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   component: Layout,
@@ -24,6 +27,8 @@ const SECCIONES = [
 ] as const
 
 function Layout() {
+  const oscuro = useTema() === 'oscuro'
+  const IconoTema = oscuro ? Sun : Moon
   return (
     <div className="min-h-dvh">
       <a
@@ -50,7 +55,18 @@ function Layout() {
               </Link>
             ))}
           </nav>
-          <p className="ml-auto hidden items-center text-xs text-muted-foreground md:flex">Hoy es {FECHA_DATOS}</p>
+          <div className="ml-auto flex items-center gap-3">
+            <p className="hidden text-xs text-muted-foreground md:block">Hoy es {FECHA_DATOS}</p>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={alternarTema}
+              aria-label={oscuro ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+              title={oscuro ? 'Modo claro' : 'Modo oscuro'}
+            >
+              <IconoTema aria-hidden />
+            </Button>
+          </div>
         </div>
       </header>
 
